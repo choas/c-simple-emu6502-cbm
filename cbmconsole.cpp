@@ -79,17 +79,15 @@ static void Console_Cursor_Home()
 
 void CBM_Console_WriteChar(unsigned char c)
 {
-	// we're emulating, so draw character on local console window
+	// we're emulating, so draw character on local console window 
 	if (c == 0x0D)
 	{
+    Serial.println();
 		if (supress_next_cr)
 			supress_next_cr = 0;
-		else
-			Serial.print('\n');
 	}
 	else if (c >= ' ' && c <= '~')
 	{
-		//ApplyColor ? .Invoke();
 		Serial.write(c);
 	}
 	else if (c == 157) // left
@@ -123,8 +121,8 @@ unsigned char CBM_Console_ReadChar(void)
         break;
       }
     }
-//		if (c >= ' ' && c <= '~')
-//			serial.Write(c); // echo
+		if (c >= ' ' && c <= '~')
+			Serial.write(c); // echo
 		if (c == '\r')
 			supress_next_cr = true;
 		return c;
