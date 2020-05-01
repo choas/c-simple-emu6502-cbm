@@ -134,6 +134,10 @@ bool ExecutePatch(void)
 	else if (PC == 0xFFCF) // CHRIN
 	{
 		A = CBM_Console_ReadChar();
+    if (A >= 'a' && A <= 'z')
+    {
+      A += ('A' - 'a'); // caps lock
+	  }
 
 		// SetA equivalent for flags
 		Z = (A == 0);
@@ -791,4 +795,3 @@ void SetMemory(ushort addr, byte value)
 	//else if (addr >= io_addr && addr < io_addr + io.Length)
 	//    io[addr - io_addr] = value;
 }
-
